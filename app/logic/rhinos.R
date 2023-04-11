@@ -2,6 +2,7 @@ box::use(
     rhino,
     reactable[reactable],
     tidyr,
+    dplyr,
 )
 
 #' @export
@@ -13,5 +14,6 @@ fetch_data <- function() {
 table <- function(data) {
     data |> 
     tidyr$pivot_wider(names_from = Species, values_from = Population) |>
+    dplyr$arrange(Year) |>
     reactable()
 }
