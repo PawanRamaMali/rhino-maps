@@ -1,5 +1,6 @@
 box::use(
   reactable[reactableOutput, renderReactable],
+  echarts4r[echarts4rOutput, renderEcharts4r],
   shiny[moduleServer, NS],
 )
 box::use(
@@ -9,14 +10,14 @@ box::use(
 #' @export
 ui <- function(id){
   ns <- NS(id)
-  reactableOutput(ns("table"))
+  echarts4rOutput(ns("chart"))
 }
 
 #' @export
 server <- function(id, data){
   moduleServer(id, function(input, output, session){
-    output$table <- renderReactable(
-      rhinos$table(data())
+    output$chart <- renderEcharts4r(
+      rhinos$chart(data())
     )
   })
 }
