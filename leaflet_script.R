@@ -27,3 +27,18 @@ leaflet() %>%
     attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
     options = tileOptions(variant='landscape', apikey = apikey)
   )
+
+
+library(rgdal)
+#install.packages('rgdal')
+
+ak_counties <- readOGR("data/tl_2013_02_cousub/tl_2013_02_cousub.shp")
+  
+m <- leaflet() |>  
+  addProviderTiles(providers$Stamen.Toner) |> 
+  setView( lng = -149.49, lat = 64.2008, zoom = 4) |> 
+  addPolygons( data = ak_counties,
+               color = "#660000",
+               weight = 1)
+m
+
